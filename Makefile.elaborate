@@ -1,0 +1,33 @@
+GIT_VERSION := $(/bin/sh git --no-pager describe --abbrev=0 HEAD)
+
+CFLAGS   = -g -Os -std=c11 -I./include -Wall -Wstrict-prototypes -Wconversion
+CFLAGS  += -Wmissing-prototypes -Wshadow -Wextra -Wunused
+CFLAGS  += -DVERSION=\"$(GIT_VERSION)\"
+LDFLAGS  = -lusb-1.0
+
+PROGS = lan951x-led-ctl
+
+all:	$(PROGS)
+
+# Generic instructions
+src/%.o: src/%.c
+	@/bin/echo -e "\t--> Compiling `basename $<`"
+	@gcc $(CFLAGS) -c $< -o $@
+
+# Specific programs
+lan951x-led-ctl:	src/lan951x-led-ctl.o
+	@/bin/echo -e "\t==> Linking objects to output file $@"
+	@gcc $(CFLAGS) $+ $(LDFLAGS) -o $@
+	@strip $@
+
+# Install
+install: $(PROGS)
+	@/bin/echo -e "\t==> Installing programs to $(DESTDIR)/bin"
+	@install -m 0755 -d $(DESTDIR)/bin
+	@install -m 0755 -t $(DESTDIR)/bin $(PROGS)
+
+clean:
+	rm -f src/*.o
+
+tidy:
+	rm -f src/*.o $(PROGS)
