@@ -4,7 +4,7 @@ RM	= /bin/rm -f
 CC	= gcc
 STRIP	= strip
 
-GIT_VERSION := $(shell git --no-pager describe')
+GIT_VERSION := $(shell git --no-pager describe abbrev=0 HEAD')
 
 CFLAGS	= -g -Os -std=c11 -I./include -Wall -Wstrict-prototypes -Wconversion
 CFLAGS	+= -Wmissing-prototypes -Wshadow -Wextra -Wunused
