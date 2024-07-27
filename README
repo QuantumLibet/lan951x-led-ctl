@@ -16,6 +16,7 @@ https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
 The Git repo with the latest version is located at:
 https://git.familie-radermacher.ch/linux/lan951x-led-ctl.git
 
+
 Compile:
 
     make
@@ -24,7 +25,7 @@ Compile:
 
         sudo apt --yes -qq install git libusb-1.0-0-dev  #  will also install: libusb-1.0-doc
         git clone ...
-        sudo make --directory lan951x-led-ctl/ install DESTDIR=/usr/local/
+        sudo make --directory lan951x-led-ctl/ DESTDIR=/usr/local/
         rm -rf ./lan951x-led-ctl
         sudo apt --yes -qq autoremove --purge libusb-1.0-0-dev
 
@@ -38,6 +39,7 @@ Usage:
 
 
 Source:
+
     original developer, cmake-version:  https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
     makefile-version:  https://github.com/dumpsite/lan951x-led-ctl
     general information about RPi-LEDs:  https://github.com/ccrisan/motioneyeos/wiki/Turn-Off-LEDs
