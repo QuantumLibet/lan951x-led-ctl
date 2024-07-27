@@ -38,6 +38,27 @@ Usage:
         1 - turn LED on
 
 
+Automate:
+
+    sudo bash -c "cat > "/etc/systemd/system/rpi_blinkenlights_set_to_off.service" <<- EOF-BLINKENLIGHTS
+        [Unit]
+        Description=to configure the RPi NIC LEDs to off
+
+        [Service]
+        Type=oneshot
+        ExecStart=/usr/bin/sleep 15  #  RPi1; can be smaller on RPi2/3
+        ExecStart=/usr/local/bin/lan951x-led-ctl  --fdx=0 --lnk=0 --spd=0
+        RemainAfterExit=no
+
+        [Install]
+        WantedBy=multi-user.target
+    EOF-BLINKENLIGHTS"
+
+    for an example, see systemd-folder
+
+    sudo --askpass systemctl enable --now --no-block rpi_blinkenlights_set_to_off.service
+
+
 Source:
 
     original developer, cmake-version:  https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
