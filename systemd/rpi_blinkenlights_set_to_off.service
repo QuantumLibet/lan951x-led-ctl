@@ -1,0 +1,13 @@
+[Unit]
+Description=to configure the RPi NIC LEDs to off
+OnFailure=job_status_email_to_scripts_at_bridgehead_it@%n.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/sleep 15
+ExecStart=/usr/local/bin/lan951x-led-ctl  --fdx=0 --lnk=0 --spd=0
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
