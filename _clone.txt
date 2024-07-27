@@ -1,0 +1,8 @@
+clone from private artifactory:
+
+    GIT_SSH_COMMAND="ssh -v -i ~/.ssh/$user_pub_key" git clone ssh://$soft-serve_server:23231/$repo
+
+or
+
+    ssh $soft-serve_user token create test-download --expires-in 5m
+    git clone http://$token@$soft-serve_server:23232/$repo
