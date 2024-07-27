@@ -4,7 +4,7 @@ LDFLAGS = -lusb-1.0
 
 all:
 	@/bin/echo -e "\tcompiling"
-	@gcc $(CFLAGS) src/lan951x-led-ctl.c $(LDFLAGS) -o lan951x-led-ctl.o
+	@gcc $(CFLAGS) src/lan951x-led-ctl.c $(LDFLAGS) -o lan951x-led-ctl
 	@strip lan951x-led-ctl
 
 	@/bin/echo -e "\tinstalling to $(DESTDIR)/bin"
