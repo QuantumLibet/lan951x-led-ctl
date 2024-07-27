@@ -35,3 +35,10 @@ Usage:
         where x is one of:
         0 - turn LED off
         1 - turn LED on
+
+
+Source:
+    original developer, cmake-version:  https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
+    makefile-version:  https://github.com/dumpsite/lan951x-led-ctl
+    general information about RPi-LEDs:  https://github.com/ccrisan/motioneyeos/wiki/Turn-Off-LEDs
+    general information about dtparam=pwr_led_trigger-entries in config.txt:  https://github.com/raspberrypi/firmware/issues/1742, esp. https://github.com/raspberrypi/firmware/issues/1742#issuecomment-1225910618
