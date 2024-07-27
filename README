@@ -42,3 +42,7 @@ Remarks:
 Tag a new version
 
     git tag --annotate v1.0-10 -m "rel. v1.0-10"
+
+Push tag
+
+    git psuh soft-serve_ssh --tags
