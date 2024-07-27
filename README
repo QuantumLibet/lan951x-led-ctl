@@ -8,7 +8,7 @@ a disco in your room at night ;-) Or you can turn them on/off from any shell
 script to show whatever status you wish.
 
 These LAN951x ethernet and USB controllers are used on many embedded computers
-like Raspberry Pi (until Version 3 B - but not 3 B Plus), Olinuxino and many more.
+like Raspberry Pi (until Version 3B - but not 3B+), Olinuxino and many more.
 
 Further info can be found at:
 https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
@@ -23,7 +23,7 @@ Compile:
     step-by-step:
 
         sudo apt --yes -qq install git libusb-1.0-0-dev  #  will also install: libusb-1.0-doc
-        git clone
+        git clone ...
         sudo make --directory lan951x-led-ctl/ install DESTDIR=/usr/local/
         rm -rf ./lan951x-led-ctl
         sudo apt --yes -qq autoremove --purge libusb-1.0-0-dev
@@ -35,14 +35,3 @@ Usage:
         where x is one of:
         0 - turn LED off
         1 - turn LED on
-
-
-Remarks:
-
-Tag a new version
-
-    git tag --annotate v1.0-10 -m "rel. v1.0-10"
-
-Push tag
-
-    git psuh soft-serve_ssh --tags
