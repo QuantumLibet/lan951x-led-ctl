@@ -1,37 +1,37 @@
-ECHO	= /bin/echo -e
-SHELL	= /bin/sh
-RM	= /bin/rm -f
-CC	= gcc
-STRIP	= strip
+ECHO  = /bin/echo -e
+SHELL = /bin/sh
+RM    = /bin/rm -f
+CC    = gcc
+STRIP = strip
 
 GIT_VERSION := $(shell git --no-pager describe abbrev=0 HEAD')
 
-CFLAGS	= -g -Os -std=c11 -I./include -Wall -Wstrict-prototypes -Wconversion
-CFLAGS	+= -Wmissing-prototypes -Wshadow -Wextra -Wunused
-CFLAGS	+= -DVERSION=\"$(GIT_VERSION)\"
-LDFLAGS	= -lusb-1.0
+CFLAGS  = -g -Os -std=c11 -I./include -Wall -Wstrict-prototypes -Wconversion
+CFLAGS += -Wmissing-prototypes -Wshadow -Wextra -Wunused
+CFLAGS += -DVERSION=\"$(GIT_VERSION)\"
+LDFLAGS = -lusb-1.0
 
 PROGS = lan951x-led-ctl
 
-all:	$(PROGS)
+all: $(PROGS)
 
 clean:
-	$(RM) src/*.o
+    $(RM) src/*.o
 tidy:
-	$(RM) src/*.o $(PROGS)
+    $(RM) src/*.o $(PROGS)
 
 install: $(PROGS)
-	@$(ECHO) "\t==> Installing programs to $(DESTDIR)/bin"
-	@install -m 0755 -d $(DESTDIR)/bin
-	@install -m 0755 -t $(DESTDIR)/bin $(PROGS)
+    @$(ECHO) "\t==> Installing programs to $(DESTDIR)/bin"
+    @install -m 0755 -d $(DESTDIR)/bin
+    @install -m 0755 -t $(DESTDIR)/bin $(PROGS)
 
 # Generic instructions
 src/%.o: src/%.c
-	@$(ECHO) "\t--> Compiling `basename $<`"
-	@$(CC) $(CFLAGS) -c $< -o $@
+    @$(ECHO) "\t--> Compiling `basename $<`"
+    @$(CC) $(CFLAGS) -c $< -o $@
 
 # Specific programs
-lan951x-led-ctl:	src/lan951x-led-ctl.o
-	@$(ECHO) "\t==> Linking objects to output file $@"
-	$(CC) $(CFLAGS) $+ $(LDFLAGS) -o $@
-	@$(STRIP) $@
+lan951x-led-ctl: src/lan951x-led-ctl.o
+    @$(ECHO) "\t==> Linking objects to output file $@"
+    $(CC) $(CFLAGS) $+ $(LDFLAGS) -o $@
+    @$(STRIP) $@
