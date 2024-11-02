@@ -23,11 +23,11 @@ Compile:
 
     step-by-step:
 
-        sudo apt-get --yes -qq install git libusb-1.0-0-dev  #  will also install: libusb-1.0-doc
+        sudo apt-get -qq install git libusb-1.0-0-dev  #  will also install: libusb-1.0-doc
         git clone ...
         sudo make --directory lan951x-led-ctl DESTDIR=/usr/local
         rm -rf ./lan951x-led-ctl
-        sudo apt-get --yes -qq autoremove --purge libusb-1.0-0-dev
+        sudo apt-get -qq autoremove --purge libusb-1.0-0-dev
 
 
 Usage:
