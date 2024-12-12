@@ -40,7 +40,7 @@ Usage:
 
 Automate:
 
-    sudo bash -c "cat > "/etc/systemd/system/rpi_blinkenlights_set_to_off.service" <<- EOF-BLINKENLIGHTS
+    sudo tee /etc/systemd/system/rpi_blinkenlights_set_to_off.service > /dev/null <<- EOF
         [Unit]
         Description=to configure the RPi NIC LEDs to off
 
@@ -52,7 +52,7 @@ Automate:
 
         [Install]
         WantedBy=multi-user.target
-    EOF-BLINKENLIGHTS"
+    EOF
 
     for an example, see systemd-folder
 
