@@ -1,4 +1,8 @@
 
+This is a copy of https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
+
+Original text: ----------------------------------------------------------------
+
 lan951x-led-ctl is a command line tool to control the LEDs connected to a
 LAN9512 or LAN9514 ethernet controller.
 
@@ -16,26 +20,35 @@ https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/
 The Git repo with the latest version is located at:
 https://git.familie-radermacher.ch/linux/lan951x-led-ctl.git
 
+-------------------------------------------------------------------------------
+
 
 Compile:
 
     make
 
-    step-by-step:
 
-        sudo apt-get -qq install git libusb-1.0-0-dev  #  will also install: libusb-1.0-doc
-        git clone ...
+    step-by-step on Debian/Raspbian/Ubuntu et al.:
+
+        sudo apt-get -qq install git libusb-1.0-0-dev
+        git clone https://github.com/QuantumLibet/lan951x-led-ctl.git
+        cd lan951x-led-ctl
         sudo make --directory lan951x-led-ctl DESTDIR=/usr/local
-        rm -rf ./lan951x-led-ctl
-        sudo apt-get -qq autoremove --purge libusb-1.0-0-dev
+
+    step-by-step on Alpine/musl et al.:
+
+        doas apk add build-base musl-dev gcc git libusb-dev
+        git clone https://github.com/QuantumLibet/lan951x-led-ctl.git && cd lan951x-led-ctl
+        doas make
 
 
 Usage:
 
-    sudo lan951x-led-ctl [--fdx=x][--lnk=x][--spd=x]
+    sudo|doas lan951x-led-ctl [--fdx=x][--lnk=x][--spd=x][--version]
         where x is one of:
         0 - turn LED off
         1 - turn LED on
+        s - LED shows status (eg. --lnk=s for NIC status)
 
 
 Automate:
@@ -56,7 +69,7 @@ Automate:
 
     for an example, see systemd-folder
 
-    sudo --askpass systemctl enable --now --no-block rpi_blinkenlights_set_to_off.service
+    sudo systemctl enable --now --no-block rpi_blinkenlights_set_to_off.service
 
 
 Source:
