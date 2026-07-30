@@ -1,23 +1,20 @@
 /*
 	lan951x-led-ctl - control LEDs of LAN951X ethernet/usb controllers
-	
-	Copyright (C) 2015-2024 Dominic Radermacher <dominic@familie-radermacher.ch>
-	
+
+	Copyright (C) 2015-2025 Dominic Radermacher <dominic@familie-radermacher.ch>
+
 	This program is free software; you can redistribute it and/or modify it
 	under the terms of the GNU General Public License version 3 as
 	published by the Free Software Foundation
-	
+
 	This program is distributed in the hope that it will be useful, but
 	WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 	See the GNU General Public License for more details.
-	
+
 	You should have received a copy of the GNU General Public License
 	along with this program; if not, write to the Free Software Foundation,
 	Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
-
-	this code has been modified as the 's' flag is not working
-	see MODIFIED remarks for details
 */
 
 #include <stdio.h>
@@ -27,6 +24,8 @@
 #include <libusb-1.0/libusb.h>
 
 #include "lan951x-led-ctl.h"
+
+#define P_NAME "lan951x-led-ctl"
 
 /* global variables */
 int led_arr[3] = { MODE_KEEP, MODE_KEEP, MODE_KEEP };
@@ -38,7 +37,7 @@ libusb_device_handle* lan951x_open(int vid, int pid)
 	libusb_device_handle* handle = NULL;
 	struct libusb_device_descriptor desc;
 	int r,i=0;
-	
+
 	if ((libusb_init(NULL)) < 0) {
 		fprintf(stderr, "libusb_init() failed\n");
 		return NULL;
@@ -90,24 +89,25 @@ int ledmode(const char* s)
 		return MODE_OFF;
 	} else if (*s == '1') {
 		return MODE_ON;
-	} /*  MODIFIED  else if ((*s == 's') || (*s == 'S')) {
+	} else if ((*s == 's') || (*s == 'S')) {
 		return MODE_STATUS;
-	} */
+	}
 	return MODE_ERR;
 }
 
 void usage(void)
 {
-	printf("usage: lan951x-led-ctl [--fdx=x][--lnk=x][--spd=x]\n");
+	printf("usage: %s [--fdx=x][--lnk=x][--spd=x]\n", P_NAME);
 	printf("\twhere x is one of:\n");
-	/*  MODIFIED  printf("\t0 - turn LED off\n\t1 - turn LED on\n\ts - LED shows status\n"); */
-	printf("\t0 - turn LED off\n\t1 - turn LED on\n");
+	printf("\t0 - turn LED off\n\t1 - turn LED on\n\ts - LED shows status\n");
+	printf("\n");
+	printf("Call '%s --version' to display version info\n", P_NAME);
 	exit(1);
 }
 
 void about(void)
 {
-	printf("lan951x-led-ctl %s programmed by Dominic Radermacher\n\n", VERSION);
+	printf("%s %s programmed by Dominic Radermacher\n\n", P_NAME, VERSION);
 	printf("For further info please visit\n");
 	printf("https://dominic.familie-radermacher.ch/computer/raspberry-pi/lan951x-led-ctl/\n\n");
 	printf("The latest version can be found in my git repo:\n");
